@@ -28,6 +28,11 @@ node['mysql']['client']['packages'].each do |mysql_pack|
   resources("package[#{mysql_pack}]").run_action(:install)
 end
 
+unless package('make')
+  execute 'apt-get update'
+  package('make')
+end
+
 chef_gem('mysql') do
   version '2.9.1'
   options '-p http://127.0.0.1:3128/'
