@@ -28,4 +28,7 @@ node['mysql']['client']['packages'].each do |mysql_pack|
   resources("package[#{mysql_pack}]").run_action(:install)
 end
 
-chef_gem('mysql') { version '2.9.1' }
+chef_gem('mysql') do
+  version '2.9.1'
+  options '-p http://127.0.0.1:3128/'
+end
